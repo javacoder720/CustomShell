@@ -1,0 +1,2 @@
+# CustomShell
+My .zshrc config
