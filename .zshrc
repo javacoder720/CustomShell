@@ -2,15 +2,13 @@ alias tfi='terraform init'
 alias tfp='terraform plan'
 alias tfa='terraform apply'
 
-alias tfshowl='terraform show list'
 function tfshow(){
-	terraform show $1
+	terraform show $*
 }
 
-function tfout(){
-	terraform output $1
+function tfo(){
+	terraform ouput $*
 }
-alias tfo='terraform output'
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
