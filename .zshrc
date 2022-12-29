@@ -1,15 +1,46 @@
-alias tfi='terraform init'
-alias tfp='terraform plan'
-alias tfa='terraform apply'
+export START="/Users/michael/my/starting/directory"
+if [[ $PWD == $HOME ]]; then
+    cd $START
+fi
+
+# terraform
+function tfi(){
+	terraform init $*
+}
+
+function tfp(){
+    terraform plan $*
+}
+
+function tfa(){
+    terraform apply $*
+}
+
+function tfaa(){
+    terraform apply -auto-approve $*
+}
+
+function tfd(){
+	terraform destroy $*
+}
+
+function tfout(){
+	terraform output $*
+}
 
 function tfshow(){
 	terraform show $*
 }
 
-function tfo(){
-	terraform ouput $*
+# git
+function gitall(){
+    git add . && git commit -m $1 && git push
 }
 
+# share images
+function remake(){
+    tfd -auto-approve && tfa -auto-approve
+}
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -113,36 +144,4 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 complete -C aws_completer aws
-
-# >>> mamba initialize >>>
-# !! Contents within this block are managed by 'mamba init' !!
-export MAMBA_EXE="/Users/gateswang/.micromamba/bin/micromamba";
-export MAMBA_ROOT_PREFIX="/Users/gateswang/micromamba";
-__mamba_setup="$('/Users/gateswang/.micromamba/bin/micromamba' shell hook --shell zsh --prefix '/Users/gateswang/micromamba' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__mamba_setup"
-else
-    if [ -f "/Users/gateswang/micromamba/etc/profile.d/micromamba.sh" ]; then
-        . "/Users/gateswang/micromamba/etc/profile.d/micromamba.sh"
-    else
-        export  PATH="/Users/gateswang/micromamba/bin:$PATH"  # extra space after export prevents interference from conda init
-    fi
-fi
-unset __mamba_setup
-# <<< mamba initialize <<<
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/gateswang/micromamba/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/gateswang/micromamba/etc/profile.d/conda.sh" ]; then
-        . "/Users/gateswang/micromamba/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/gateswang/micromamba/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 
